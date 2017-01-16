@@ -16,11 +16,13 @@
 * If possible, keep all your JavaScript and jQuery includes at the bottom of your page.
 
 * What version to use?
+
   * DO NOT use jQuery version 2.x if you support Internet Explorer 6/7/8.
   * For new web-apps, if you do not have any plugin compatibility issue, it's highly recommended to use the latest jQuery version.
   * When loading jQuery from CDN's, always specify the complete version number you want to load \(Example: 1.11.0 as opposed to 1.11 or just 1\).
   * DO NOT load multiple jQuery versions.
   * DO NOT use jquery-latest.js from jQuery CDN.
+
 * If you are using other libraries like Prototype, MooTools, Zepto etc. that uses $ sign as well, try not to use $ for calling jQuery functions and instead use jQuery simply. You can return control of $ back to the other library with a call to $.noConflict\(\).
 * For advanced browser feature detection, use [Modernizr](https://modernizr.com/).
 
@@ -51,8 +53,8 @@
   // GOOD, #products is already selected by document.getElementById() so only div.id needs to go through Sizzle selector engine
   var $productIds = $("#products").find("div.id");
   ```
-
 * Be specific on the right-hand side of your selector, and less specific on the left.
+
 * ```js
   // Unoptimized
   $("div.data .gonzalez");
@@ -60,16 +62,16 @@
   // Optimized
   $(".data td.gonzalez");
   ```
-
 * Avoid Excessive Specificity.
+
 * ```js
   $(".data table.attendees td.gonzalez");
 
   // Better: Drop the middle if possible.
   $(".data td.gonzalez");
   ```
-
 * Give your Selectors a Context.
+
 * ```js
   // SLOWER because it has to traverse the whole DOM for .class
   $('.class');
@@ -77,20 +79,20 @@
   // FASTER because now it only looks under class-container.
   $('.class', '#class-container');
   ```
-
 * Avoid Universal Selectors.
+
 * ```js
   $('div.container > *'); // BAD
   $('div.container').children(); // BETTER
   ```
-
 * Avoid Implied Universal Selectors. When you leave off the selector, the universal selector \`\*\` is still implied.
+
 * ```js
   $('div.someclass :radio'); // BAD
   $('div.someclass input:radio'); // GOOD
   ```
-
 * Don’t Descend Multiple IDs or nest when selecting an ID. ID-only selections are handled using document.getElementById\(\) so don't mix them with other selectors.
+
 * ```js
   $('#outer #inner'); // BAD
   $('div#inner'); // BAD
@@ -106,8 +108,8 @@
   //...a lot of complicated things on $myList
   $myList.appendTo("#list-container");
   ```
-
 * Use string concatenation or array.join\(\) over .append\(\).
+
 * ```js
   // BAD
   var $myList = $("#list");
@@ -130,8 +132,8 @@
   }
   $myList.html(array.join(''));
   ```
-
 * Don’t Act on Absent Elements.
+
 * ```js
   // BAD: This runs three functions before it realizes there's nothing in the selection
   $("#nosuchthing").slideUp();
@@ -154,8 +156,8 @@
   function myLinkClickHandler(){...}
   $("#myLink").on("click", myLinkClickHandler);
   ```
-
 * Document ready event handler should not be an anonymous function. Once again, anonymous functions are difficult to debug, maintain, test, or reuse.
+
 * ```js
   $(function(){ ... }); // BAD: You can never reuse or write a test for this function.
 
@@ -165,9 +167,9 @@
       // Page load event where you can initialize values and call other initializers.
   }
   ```
-
 * DO NOT use behavioral markup in HTML \(JavaScript inlining\), these are debugging nightmares. Always bind events with jQuery to be consistent so it's easier to attach and remove events dynamically.
-* ```
+
+* ```php
   <a id="myLink" href="#" onclick="myEventHandler();">my link</a> <!-- BAD -->
   ```
 
