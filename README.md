@@ -24,6 +24,7 @@
   * DO NOT use jquery-latest.js from jQuery CDN.
 
 * If you are using other libraries like Prototype, MooTools, Zepto etc. that uses $ sign as well, try not to use $ for calling jQuery functions and instead use jQuery simply. You can return control of $ back to the other library with a call to $.noConflict\(\).
+
 * For advanced browser feature detection, use [Modernizr](https://modernizr.com/).
 
 ## jQuery Variables
@@ -36,7 +37,7 @@
   ```
 * Use camel case for naming variables.
 
-# Selectors
+## Selectors
 
 * Use ID selector whenever possible \(but only if it makes sense to do so\). It is faster because they are handled using document.getElementById\(\).
 * When using class selectors, don't use the element type in your selector.
@@ -100,7 +101,7 @@
   $('#inner'); // GOOD, only calls document.getElementById()
   ```
 
-# DOM Manipulation
+## DOM Manipulation
 
 * Always detach any existing element before manipulation and attach it back after manipulating it.
 * ```js
@@ -145,7 +146,7 @@
   }
   ```
 
-# Events
+## Events
 
 * Use only one Document Ready handler per page. It makes it easier to debug and keep track of the behavior flow.
 * DO NOT use anonymous functions to attach events. Anonymous functions are difficult to debug, maintain, test, or reuse.
@@ -171,6 +172,139 @@
 
 * ```php
   <a id="myLink" href="#" onclick="myEventHandler();">my link</a> <!-- BAD -->
+  ```
+
+  ```js
+  $("#myLink").on("click", myEventHandler); // GOOD
+  ```
+
+* When possible, use custom namespace for events. It's easier to unbind the exact event that you attached without affecting other events bound to the DOM element.
+* ```js
+  $("#myLink").on("click.mySpecialClick", myEventHandler); // GOOD
+  // Later on, it's easier to unbind just your click event
+  $("#myLink").unbind("click.mySpecialClick");
+  ```
+
+* Use event delegation when you have to attach same event to multiple elements. Event delegation allows us to attach a single event listener, to a parent element, that will fire for all descendants matching a selector, whether those descendants exist now or are added in the future.
+* ```js
+  $("#list a").on("click", myClickHandler); // BAD, you are attaching an event to all the links under the list.
+  $("#list").on("click", "a", myClickHandler); // GOOD, only one event handler is attached to the parent.
+  ```
+
+## Ajax
+
+* Avoid using .getJson\(\) or .get\(\), simply use the $.ajax\(\) as that's what gets called internally.
+* DO NOT use http requests on https sites. Prefer schemaless URLs \(leave the protocol http/https out of your URL\).
+* DO NOT put request parameters in the URL, send them using data object setting.
+* ```js
+  // Less readable...
+  $.ajax({
+      url: "something.php?param1=test1&param2=test2",
+      ....
+  });
+
+  // More readable...
+  $.ajax({
+      url: "something.php",
+      data: { param1: test1, param2: test2 }
+  });
+  ```
+
+* Try to specify the dataType setting so it's easier to know what kind of data you are working with. \(See Ajax Template example below\).
+* Use Delegated event handlers for attaching events to content loaded using Ajax. Delegated events have the advantage that they can process events from descendant elements that are added to the document at a later time \(example Ajax\).
+* ```js
+  $("#parent-container").on("click", "a", delegatedClickHandlerForAjax);
+  ```
+
+* Use Promise interface: \(EXAMPLES: http://www.htmlgoodies.com/beyond/javascript/making-promises-with-jquery-deferred.html\)
+* ```js
+  $.ajax({ ... }).then(successHandler, failureHandler);
+
+  // OR
+  var jqxhr = $.ajax({ ... });
+  jqxhr.done(successHandler);
+  jqxhr.fail(failureHandler);
+  ```
+
+* Sample Ajax Template:
+* ```js
+  var jqxhr = $.ajax({
+      url: url,
+      type: "GET", // default is GET but you can use other verbs based on your needs.
+      cache: true, // default is true, but false for dataType 'script' and 'jsonp', so set it on need basis.
+      data: {}, // add your request parameters in the data object.
+      dataType: "json", // specify the dataType for future reference
+      jsonp: "callback", // only specify this to match the name of callback parameter your API is expecting for JSONP requests.
+      statusCode: { // if you want to handle specific error codes, use the status code mapping settings.
+          404: handler404,
+          500: handler500
+      }
+  });
+  jqxhr.done(successHandler);
+  jqxhr.fail(failureHandler);
+  ```
+
+## Effects and Animations
+
+* Adopt a restrained and consistent approach to implementing animation functionality.
+* DO NOT over-do the animation effects until driven by the UX requirements.
+  * Try to use simeple show/hide, toggle and slideUp/slideDown functionality to toggle elements.
+
+## Plugins
+
+* Always choose a plugin with good support, documentation, testing and community support.
+* Check the compatibility of plugin with the version of jQuery that you are using.
+* Any common reusable component should be implemented as a jQuery plugin.
+
+## Chaining
+
+* Use chaining as an alternative to variable caching and multiple selector calls.
+* ```js
+  $("#myDiv").addClass("error").show();
+  ```
+
+* Whenever the chain grows over 3 links or gets complicated because of event assignment, use appropriate line breaks and indentation to make the code readable.
+* ```js
+  $("#myLink")
+      .addClass("bold")
+      .on("click", myClickHandler)
+      .on("mouseover", myMouseOverHandler)
+      .show();
+  ```
+
+* For long chains it is acceptable to cache intermediate objects in a variable.
+
+## Miscellaneous
+
+* Use Object literals for parameters.
+* ```js
+  $myLink.attr("href", "#").attr("title", "my link").attr("rel", "external"); // BAD, 3 calls to attr()
+  // GOOD, only 1 call to attr()
+  $myLink.attr({
+      href: "#",
+      title: "my link",
+      rel: "external"
+  });
+  ```
+
+* Do not mix CSS with jQuery.
+* ```
+  $("#mydiv").css({'color':red, 'font-weight':'bold'}); // BAD
+  ```
+
+  ```css
+  .error { color: red; font-weight: bold; } /* GOOD */
+  ```
+
+  ```js
+  $("#mydiv").addClass("error"); // GOOD
+  ```
+
+* DO NOT use Deprecated Methods. It is always important to keep an eye on deprecated methods for each new version and try avoid using them. [Click here](http://api.jquery.com/category/deprecated/) for a list of deprecated methods.
+* Combine jQuery with native JavaScript when needed.
+* ```js
+  $("#myId"); // is still little slower than...
+  document.getElementById("myId");
   ```
 
 
