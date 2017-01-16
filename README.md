@@ -304,7 +304,7 @@
 * Combine jQuery with native JavaScript when needed.
 
 * ```js
-  $("#myId"); // is still little slower than...
+  $("#myId"); // is still a little slower than...
   document.getElementById("myId");
   ```
 
