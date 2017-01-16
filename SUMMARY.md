@@ -1,3 +1,4 @@
-# Table of content
+# Summary
 
-* [First Chapter](chapter1.md)
+* [Loading jQuery](README.md)
+
