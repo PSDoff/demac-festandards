@@ -11,8 +11,8 @@
   }
   </script>
   ```
-
 * Use protocol-relative/protocol-independent  URL \(leave http: or https: out\) as shown above.
+
 * If possible, keep all your JavaScript and jQuery includes at the bottom of your page.
 * What version to use?
   * DO NOT use jQuery version 2.x if you support Internet Explorer 6/7/8.
@@ -31,7 +31,6 @@
   var $myDiv = $("#myDiv");
   $myDiv.click(function(){...});
   ```
-
 * Use camel case for naming variables.
 
 # Selectors
@@ -42,8 +41,8 @@
   var $products = $("div.products"); // SLOW
   var $products = $(".products"); // FAST
   ```
-
 * Use find for Id-&gt;Child nested selectors. The .find\(\) approach is faster because the first selection is handled without going through the Sizzle selector engine.
+
 * ```js
   // BAD, a nested query for Sizzle selector engine
   var $productIds = $("#products div.id");
