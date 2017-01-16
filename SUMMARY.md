@@ -1,4 +1,4 @@
 # Summary
 
-* [Loading jQuery](README.md)
+* [jQuery Code Style | jQuery Best Practices](README.md)
 

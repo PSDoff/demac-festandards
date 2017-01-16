@@ -1,6 +1,6 @@
 # jQuery Code Style \| jQuery Best Practices
 
-## Loading jQuery
+## Loading jQuery {#loading-jquery}
 
 * Always try to use a CDN to include jQuery on your page.
 * ```js
@@ -27,7 +27,7 @@
 
 * For advanced browser feature detection, use [Modernizr](https://modernizr.com/).
 
-## jQuery Variables
+## jQuery Variables {#jquery-variables}
 
 * All variables that are used to store/cache jQuery objects should have a name prefixed with a $.
 * Always cache your jQuery selector returned objects in variables for reuse.
@@ -37,7 +37,7 @@
   ```
 * Use camel case for naming variables.
 
-## Selectors
+## Selectors {#selectors}
 
 * Use ID selector whenever possible \(but only if it makes sense to do so\). It is faster because they are handled using document.getElementById\(\).
 * When using class selectors, don't use the element type in your selector.
@@ -101,7 +101,7 @@
   $('#inner'); // GOOD, only calls document.getElementById()
   ```
 
-## DOM Manipulation
+## DOM Manipulation {#dom-manipulation}
 
 * Always detach any existing element before manipulation and attach it back after manipulating it.
 * ```js
@@ -146,7 +146,7 @@
   }
   ```
 
-## Events
+## Events {#events}
 
 * Use only one Document Ready handler per page. It makes it easier to debug and keep track of the behavior flow.
 * DO NOT use anonymous functions to attach events. Anonymous functions are difficult to debug, maintain, test, or reuse.
@@ -191,7 +191,7 @@
   $("#list").on("click", "a", myClickHandler); // GOOD, only one event handler is attached to the parent.
   ```
 
-## Ajax
+## Ajax {#ajax}
 
 * Avoid using .getJson\(\) or .get\(\), simply use the $.ajax\(\) as that's what gets called internally.
 * DO NOT use http requests on https sites. Prefer schemaless URLs \(leave the protocol http/https out of your URL\).
@@ -245,19 +245,19 @@
   jqxhr.fail(failureHandler);
   ```
 
-## Effects and Animations
+## Effects and Animations {#effects-and-animations}
 
 * Adopt a restrained and consistent approach to implementing animation functionality.
 * DO NOT over-do the animation effects until driven by the UX requirements.
   * Try to use simeple show/hide, toggle and slideUp/slideDown functionality to toggle elements.
 
-## Plugins
+## Plugins {#plugins}
 
 * Always choose a plugin with good support, documentation, testing and community support.
 * Check the compatibility of plugin with the version of jQuery that you are using.
 * Any common reusable component should be implemented as a jQuery plugin.
 
-## Chaining
+## Method Chaining {#method-chaining}
 
 * Use chaining as an alternative to variable caching and multiple selector calls.
 * ```js
@@ -274,7 +274,7 @@
   ```
 * For long chains it is acceptable to cache intermediate objects in a variable.
 
-## Miscellaneous
+## Miscellaneous {#misc}
 
 * Use Object literals for parameters.
 * ```js
