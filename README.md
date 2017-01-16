@@ -1,6 +1,6 @@
 # jQuery Code Style \| jQuery Best Practices
 
-## Loading jQuery {#loading-jquery}
+## Loading jQuery
 
 * Always try to use a CDN to include jQuery on your page.
 * ```js
