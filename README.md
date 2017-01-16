@@ -212,6 +212,7 @@
 * Try to specify the dataType setting so it's easier to know what kind of data you are working with. \(See Ajax Template example below\).
 
 * Use Delegated event handlers for attaching events to content loaded using Ajax. Delegated events have the advantage that they can process events from descendant elements that are added to the document at a later time \(example Ajax\).
+
 * ```js
   $("#parent-container").on("click", "a", delegatedClickHandlerForAjax);
   ```
@@ -287,7 +288,7 @@
   ```
 * Do not mix CSS with jQuery.
 
-* ```
+* ```js
   $("#mydiv").css({'color':red, 'font-weight':'bold'}); // BAD
   ```
 
@@ -301,6 +302,7 @@
 * DO NOT use Deprecated Methods. It is always important to keep an eye on deprecated methods for each new version and try avoid using them. [Click here](http://api.jquery.com/category/deprecated/) for a list of deprecated methods.
 
 * Combine jQuery with native JavaScript when needed.
+
 * ```js
   $("#myId"); // is still little slower than...
   document.getElementById("myId");
