@@ -177,15 +177,15 @@
   ```js
   $("#myLink").on("click", myEventHandler); // GOOD
   ```
-
 * When possible, use custom namespace for events. It's easier to unbind the exact event that you attached without affecting other events bound to the DOM element.
+
 * ```js
   $("#myLink").on("click.mySpecialClick", myEventHandler); // GOOD
   // Later on, it's easier to unbind just your click event
   $("#myLink").unbind("click.mySpecialClick");
   ```
-
 * Use event delegation when you have to attach same event to multiple elements. Event delegation allows us to attach a single event listener, to a parent element, that will fire for all descendants matching a selector, whether those descendants exist now or are added in the future.
+
 * ```js
   $("#list a").on("click", myClickHandler); // BAD, you are attaching an event to all the links under the list.
   $("#list").on("click", "a", myClickHandler); // GOOD, only one event handler is attached to the parent.
@@ -209,14 +209,14 @@
       data: { param1: test1, param2: test2 }
   });
   ```
-
 * Try to specify the dataType setting so it's easier to know what kind of data you are working with. \(See Ajax Template example below\).
+
 * Use Delegated event handlers for attaching events to content loaded using Ajax. Delegated events have the advantage that they can process events from descendant elements that are added to the document at a later time \(example Ajax\).
 * ```js
   $("#parent-container").on("click", "a", delegatedClickHandlerForAjax);
   ```
+* Use Promise interface: \(EXAMPLES: [http://www.htmlgoodies.com/beyond/javascript/making-promises-with-jquery-deferred.html\](http://www.htmlgoodies.com/beyond/javascript/making-promises-with-jquery-deferred.html\)\)
 
-* Use Promise interface: \(EXAMPLES: http://www.htmlgoodies.com/beyond/javascript/making-promises-with-jquery-deferred.html\)
 * ```js
   $.ajax({ ... }).then(successHandler, failureHandler);
 
@@ -225,8 +225,8 @@
   jqxhr.done(successHandler);
   jqxhr.fail(failureHandler);
   ```
-
 * Sample Ajax Template:
+
 * ```js
   var jqxhr = $.ajax({
       url: url,
@@ -262,8 +262,8 @@
 * ```js
   $("#myDiv").addClass("error").show();
   ```
-
 * Whenever the chain grows over 3 links or gets complicated because of event assignment, use appropriate line breaks and indentation to make the code readable.
+
 * ```js
   $("#myLink")
       .addClass("bold")
@@ -271,7 +271,6 @@
       .on("mouseover", myMouseOverHandler)
       .show();
   ```
-
 * For long chains it is acceptable to cache intermediate objects in a variable.
 
 ## Miscellaneous
@@ -286,8 +285,8 @@
       rel: "external"
   });
   ```
-
 * Do not mix CSS with jQuery.
+
 * ```
   $("#mydiv").css({'color':red, 'font-weight':'bold'}); // BAD
   ```
@@ -299,8 +298,8 @@
   ```js
   $("#mydiv").addClass("error"); // GOOD
   ```
-
 * DO NOT use Deprecated Methods. It is always important to keep an eye on deprecated methods for each new version and try avoid using them. [Click here](http://api.jquery.com/category/deprecated/) for a list of deprecated methods.
+
 * Combine jQuery with native JavaScript when needed.
 * ```js
   $("#myId"); // is still little slower than...
